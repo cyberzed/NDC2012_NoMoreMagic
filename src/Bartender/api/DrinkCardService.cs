@@ -1,36 +1,30 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using DTO;
-using ServiceStack.OrmLite;
-using ServiceStack.OrmLite.SqlServer;
+using Raven.Client.Embedded;
+using Raven.Client.Linq;
 using ServiceStack.ServiceInterface;
 
 namespace Bartender.api
 {
 	public class DrinkCardService : ServiceBase<DrinkCardRequest>
 	{
-		private readonly OrmLiteConnectionFactory connectionFactory =
-			new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["DB"].ConnectionString, SqlServerOrmLiteDialectProvider.Instance);
-
 		protected override object Run(DrinkCardRequest request)
 		{
-			try
+			using (var documentStore = new EmbeddableDocumentStore {DataDirectory = ConfigurationManager.AppSettings["RavenDataDir"]}.Initialize())
 			{
-				var drinkCards = connectionFactory.Exec(dbCmd => dbCmd.Select<DrinkCard>(q => q.CardType == request.CardType));
-
-				if (drinkCards.Any())
+				using (var session = documentStore.OpenSession())
 				{
-					return drinkCards.First();
+					var drinkCards = (from dc in session.Query<DrinkCard>() where dc.CardType == request.CardType select dc);
+
+					if (drinkCards.Any())
+					{
+						return drinkCards.First();
+					}
 				}
 			}
-			catch (Exception e)
-			{
 
-				throw;
-			}
-
-			return new DrinkCard();
+			return default(DrinkCard);
 		}
 	}
 }
