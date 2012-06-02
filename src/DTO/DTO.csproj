@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Drink.cs" />
+    <Compile Include="DrinkCard.cs" />
+    <Compile Include="DrinkCardRequest.cs" />
+    <Compile Include="DrinkCardType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
