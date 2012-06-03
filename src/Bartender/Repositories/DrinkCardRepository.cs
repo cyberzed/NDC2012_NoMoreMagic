@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DTO;
+using Bartender.Entities;
 using Raven.Client;
 using Raven.Client.Linq;
 

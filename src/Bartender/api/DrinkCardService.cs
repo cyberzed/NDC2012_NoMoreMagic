@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Bartender.Repositories;
 using DTO;
 using ServiceStack.ServiceInterface;
@@ -7,11 +8,13 @@ namespace Bartender.Api
 {
 	public class DrinkCardService : RestServiceBase<DrinkCardRequest>
 	{
+		private readonly IMappingEngine mapper;
 		private readonly DrinkCardRepository repository;
 
-		public DrinkCardService(DrinkCardRepository repository)
+		public DrinkCardService(DrinkCardRepository repository, IMappingEngine mapper)
 		{
 			this.repository = repository;
+			this.mapper = mapper;
 		}
 
 		public override object OnGet(DrinkCardRequest request)
@@ -20,7 +23,9 @@ namespace Bartender.Api
 			{
 				var drinkCard = repository.GetById(request.DrinkCardId);
 
-				return drinkCard;
+				var dtoDrinkCard = mapper.Map<Entities.DrinkCard, DrinkCard>(drinkCard);
+
+				return dtoDrinkCard;
 			}
 
 			var card = repository.GetDrinkCardByType(request.CardType);
@@ -38,4 +43,4 @@ namespace Bartender.Api
 			return base.OnPut(request);
 		}
 	}
-}
+}}
