@@ -35,5 +35,33 @@ namespace Bartender.Repositories
 
 			return drinkCard;
 		}
+
+		public DrinkCard Store(DrinkCard drinkCard)
+		{
+			if (drinkCard.Id == Guid.Empty)
+			{
+				session.Store(drinkCard);
+			}
+			else
+			{
+				session.Store(drinkCard, drinkCard.Id);
+			}
+
+			session.SaveChanges();
+
+			return session.Load<DrinkCard>(drinkCard.Id);
+		}
+
+		public void Delete(DrinkCard drinkCard)
+		{
+			var card = session.Load<DrinkCard>(drinkCard.Id);
+
+			if (card != null)
+			{
+				session.Delete(card);
+
+				session.SaveChanges();
+			}
+		}
 	}
 }

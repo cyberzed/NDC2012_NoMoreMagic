@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{32220EF9-EB96-4405-AA9C-C594AB1EB715}</ProjectGuid>
+    <ProjectGuid>{55EB5F73-76C7-410B-86D3-0D75E25B1B04}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DTO</RootNamespace>
-    <AssemblyName>DTO</AssemblyName>
+    <RootNamespace>Bartender.Core</RootNamespace>
+    <AssemblyName>Bartender.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrinkCard.cs" />
-    <Compile Include="DrinkCardRequest.cs" />
-    <Compile Include="DrinkCardType.cs" />
-    <Compile Include="DrinkRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

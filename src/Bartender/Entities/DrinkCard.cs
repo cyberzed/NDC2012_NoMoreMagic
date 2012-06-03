@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Bartender.Entities
 {
@@ -6,5 +7,6 @@ namespace Bartender.Entities
 	{
 		public Guid Id { get; set; }
 		public DrinkCardType CardType { get; set; }
+		public IEnumerable<Drink> Drinks { get; set; }
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using DTO;
+using Bartender.Entities;
 using ServiceStack.ServiceClient.Web;
 
 namespace Bartender
@@ -9,9 +9,15 @@ namespace Bartender
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			var serviceClient = new JsonServiceClient(Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) +"/api");
+			var serviceClient = new JsonServiceClient(Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) + "/api");
 
-			var drinkCard = serviceClient.Send<DrinkCard>(HttpMethod.Get, "/drinkcards", null);
+			var drinkCardResponse = serviceClient.Send<DrinkCardResponse>(HttpMethod.Get, "/drinkcards",
+			                                                              new DrinkCard {CardType = DrinkCardType.Afternoon});
+
+			if (drinkCardResponse.Card != null)
+			{
+				serviceClient.Delete<object>(string.Format("/drinkcards/{0}", drinkCardResponse.Card.Id));
+			}
 		}
 	}
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace DTO
+namespace Bartender.Entities
 {
 	public class DrinkRequest
 	{

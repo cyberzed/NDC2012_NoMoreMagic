@@ -1,4 +1,4 @@
-﻿using DTO;
+﻿using Bartender.Entities;
 using ServiceStack.ServiceInterface;
 
 namespace Bartender.Api

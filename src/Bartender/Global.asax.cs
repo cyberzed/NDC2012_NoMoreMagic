@@ -1,5 +1,4 @@
 ﻿using System;
-using Bartender.Api;
 using Bartender.Installers;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
@@ -30,7 +29,6 @@ namespace Bartender
 
 			container.Install(
 				new RavenDbInstaller(),
-				new AutoMapperInstaller(),
 				new AppInstaller()
 				);
 		}

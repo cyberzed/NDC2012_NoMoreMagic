@@ -1,5 +1,5 @@
 using Bartender.Api;
-using DTO;
+using Bartender.Entities;
 using Funq;
 using ServiceStack.Configuration;
 using ServiceStack.Logging;
@@ -21,8 +21,8 @@ namespace Bartender
 		{
 			SetConfig(new EndpointHostConfig {ServiceStackHandlerFactoryPath = "api"});
 
-			Routes.Add<DrinkCardRequest>("/drinkcards").Add<DrinkCardRequest>("/drinkcards/{DrinkCardId}");
-			Routes.Add<DrinkRequest>("/drinks").Add<DrinkRequest>("/drinks/{DrinkId}");
+			Routes.Add<DrinkCard>("/drinkcards").Add<DrinkCard>("/drinkcards/{Id}");
+			Routes.Add<DrinkRequest>("/drinks").Add<DrinkRequest>("/drinks/{Id}");
 		}
 	}
 }
