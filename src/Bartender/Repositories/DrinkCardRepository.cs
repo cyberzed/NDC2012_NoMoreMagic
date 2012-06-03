@@ -31,7 +31,9 @@ namespace Bartender.Repositories
 
 		public DrinkCard GetById(Guid drinkCardId)
 		{
-			throw new NotImplementedException();
+			var drinkCard = session.Load<DrinkCard>(drinkCardId);
+
+			return drinkCard;
 		}
 	}
 }

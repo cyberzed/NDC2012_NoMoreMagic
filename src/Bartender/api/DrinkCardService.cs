@@ -16,7 +16,7 @@ namespace Bartender.Api
 
 		public override object OnGet(DrinkCardRequest request)
 		{
-			if( request.DrinkCardId!=Guid.Empty)
+			if (request.DrinkCardId != Guid.Empty)
 			{
 				var drinkCard = repository.GetById(request.DrinkCardId);
 
