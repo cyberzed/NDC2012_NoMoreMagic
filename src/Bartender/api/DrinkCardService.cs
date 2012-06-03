@@ -1,30 +1,36 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using Bartender.Repositories;
 using DTO;
-using Raven.Client.Embedded;
-using Raven.Client.Linq;
 using ServiceStack.ServiceInterface;
 
-namespace Bartender.api
+namespace Bartender.Api
 {
-	public class DrinkCardService : ServiceBase<DrinkCardRequest>
+	public class DrinkCardService : RestServiceBase<DrinkCardRequest>
 	{
-		protected override object Run(DrinkCardRequest request)
+		private readonly DrinkCardRepository repository;
+
+		public DrinkCardService(DrinkCardRepository repository)
 		{
-			using (var documentStore = new EmbeddableDocumentStore {DataDirectory = ConfigurationManager.AppSettings["RavenDataDir"]}.Initialize())
-			{
-				using (var session = documentStore.OpenSession())
-				{
-					var drinkCards = (from dc in session.Query<DrinkCard>() where dc.CardType == request.CardType select dc);
+			this.repository = repository;
+		}
 
-					if (drinkCards.Any())
-					{
-						return drinkCards.First();
-					}
-				}
-			}
+		public override object OnGet(DrinkCardRequest request)
+		{
+			if( request.DrinkCardId!=default(int))
+			{}
 
-			return default(DrinkCard);
+			var drinkCard = repository.GetDrinkCardByType(request.CardType);
+
+			return drinkCard;
+		}
+
+		public override object OnDelete(DrinkCardRequest request)
+		{
+			return base.OnDelete(request);
+		}
+
+		public override object OnPut(DrinkCardRequest request)
+		{
+			return base.OnPut(request);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using Funq;
 using ServiceStack.WebHost.Endpoints;
 
-namespace Bartender.api
+namespace Bartender.Api
 {
 	public class ApiHost : AppHostBase
 	{
@@ -15,6 +15,7 @@ namespace Bartender.api
 			SetConfig(new EndpointHostConfig {ServiceStackHandlerFactoryPath = "api"});
 
 			Routes.Add<DrinkCardRequest>("/drinkcards");
+			Routes.Add<DrinkRequest>("/drinks");
 		}
 	}
 }
