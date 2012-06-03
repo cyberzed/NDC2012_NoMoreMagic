@@ -30,6 +30,7 @@ namespace Bartender
 
 			container.Install(
 				new RavenDbInstaller(),
+				new AutoMapperInstaller(),
 				new AppInstaller()
 				);
 		}
