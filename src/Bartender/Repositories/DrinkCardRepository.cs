@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DTO;
 using Raven.Client;
@@ -26,6 +27,11 @@ namespace Bartender.Repositories
 			{
 				return default(DrinkCard);
 			}
+		}
+
+		public DrinkCard GetById(Guid drinkCardId)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

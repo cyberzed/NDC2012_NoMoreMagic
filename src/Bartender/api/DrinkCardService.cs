@@ -1,4 +1,5 @@
-﻿using Bartender.Repositories;
+﻿using System;
+using Bartender.Repositories;
 using DTO;
 using ServiceStack.ServiceInterface;
 
@@ -15,12 +16,16 @@ namespace Bartender.Api
 
 		public override object OnGet(DrinkCardRequest request)
 		{
-			if( request.DrinkCardId!=default(int))
-			{}
+			if( request.DrinkCardId!=Guid.Empty)
+			{
+				var drinkCard = repository.GetById(request.DrinkCardId);
 
-			var drinkCard = repository.GetDrinkCardByType(request.CardType);
+				return drinkCard;
+			}
 
-			return drinkCard;
+			var card = repository.GetDrinkCardByType(request.CardType);
+
+			return card;
 		}
 
 		public override object OnDelete(DrinkCardRequest request)

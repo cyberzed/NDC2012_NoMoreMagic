@@ -160,10 +160,11 @@
     <Compile Include="Api\DrinkCardService.cs" />
     <Compile Include="Api\DrinkService.cs" />
     <Compile Include="Entities\Drink.cs" />
-    <Compile Include="Entities\Ingredient.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Installers\AppInstaller.cs" />
+    <Compile Include="Installers\RavenDbInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DrinkCardRepository.cs" />
   </ItemGroup>
