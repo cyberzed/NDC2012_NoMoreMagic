@@ -22,7 +22,7 @@ namespace Bartender
 			SetConfig(new EndpointHostConfig {ServiceStackHandlerFactoryPath = "api"});
 
 			Routes.Add<DrinkCard>("/drinkcards").Add<DrinkCard>("/drinkcards/{Id}");
-			Routes.Add<DrinkRequest>("/drinks").Add<DrinkRequest>("/drinks/{Id}");
+			Routes.Add<Drink>("/drinks").Add<Drink>("/drinks/{Id}");
 		}
 	}
 }

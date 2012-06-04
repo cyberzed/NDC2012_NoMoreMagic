@@ -22,12 +22,12 @@ namespace Bartender.Api
 			{
 				var drinkCard = repository.GetById(request.Id);
 
-				return new DrinkCardResponse {Card = drinkCard};
+				return new DrinkCardResponse {Cards = new[] {drinkCard}};
 			}
 
-			var card = repository.GetDrinkCardByType(request.CardType);
+			var cards = repository.GetAll();
 
-			return new DrinkCardResponse {Card = card};
+			return new DrinkCardResponse {Cards = cards};
 		}
 
 		public override object OnDelete(DrinkCard request)
@@ -41,7 +41,7 @@ namespace Bartender.Api
 		{
 			var card = repository.Store(request);
 
-			var response = new DrinkCardResponse {Card = card};
+			var response = new DrinkCardResponse {Cards = new[] {card}};
 
 			return new HttpResult(response) {StatusCode = HttpStatusCode.Created};
 		}

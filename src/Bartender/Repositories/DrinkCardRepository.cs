@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Bartender.Entities;
 using Raven.Client;
 using Raven.Client.Linq;
@@ -15,18 +15,9 @@ namespace Bartender.Repositories
 			this.session = session;
 		}
 
-		public DrinkCard GetDrinkCardByType(DrinkCardType cardType)
+		public IEnumerable<DrinkCard> GetAll()
 		{
-			var drinkCards = (from dc in session.Query<DrinkCard>() where dc.CardType == cardType select dc);
-
-			if (drinkCards.Any())
-			{
-				return drinkCards.First();
-			}
-			else
-			{
-				return default(DrinkCard);
-			}
+			return (from dc in session.Query<DrinkCard>() select dc);
 		}
 
 		public DrinkCard GetById(Guid drinkCardId)

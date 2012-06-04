@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using Bartender.Entities;
 using ServiceStack.ServiceClient.Web;
@@ -11,13 +13,17 @@ namespace Bartender
 		{
 			var serviceClient = new JsonServiceClient(Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) + "/api");
 
-			var drinkCardResponse = serviceClient.Send<DrinkCardResponse>(HttpMethod.Get, "/drinkcards",
-			                                                              new DrinkCard {CardType = DrinkCardType.Afternoon});
+			var drinkCardResponse = serviceClient.Get<DrinkCardResponse>("/drinkcards");
 
-			if (drinkCardResponse.Card != null)
+			if (drinkCardResponse.Cards.Any())
 			{
-				serviceClient.Delete<object>(string.Format("/drinkcards/{0}", drinkCardResponse.Card.Id));
+				foreach (var drinkCard in drinkCardResponse.Cards)
+				{
+					serviceClient.Delete<object>(string.Format("/drinkcards/{0}", drinkCard.Id));
+				}
 			}
+
+			var drinks = serviceClient.Get<IEnumerable<Drink>>("/drinks");
 		}
 	}
 }

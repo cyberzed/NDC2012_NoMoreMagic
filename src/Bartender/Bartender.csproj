@@ -142,7 +142,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
+    <Content Include="Reset.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Raven.Studio.xap" />
     <Content Include="Web.config">
@@ -159,19 +159,18 @@
     <Compile Include="ApiHost.cs" />
     <Compile Include="Api\DrinkCardService.cs" />
     <Compile Include="Api\DrinkService.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Entities\DrinkResponse.cs" />
+    <Compile Include="Reset.aspx.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Reset.aspx.designer.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
     </Compile>
     <Compile Include="Entities\Drink.cs" />
     <Compile Include="Entities\DrinkCard.cs" />
     <Compile Include="Entities\DrinkCardResponse.cs" />
     <Compile Include="Entities\DrinkCardType.cs" />
-    <Compile Include="Entities\DrinkRequest.cs" />
-    <Compile Include="Entities\Ingredient.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +178,7 @@
     <Compile Include="Installers\RavenDbInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DrinkCardRepository.cs" />
+    <Compile Include="Repositories\DrinkRepository.cs" />
     <Compile Include="WindsorContainerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
