@@ -6,6 +6,7 @@ using Castle.Facilities.Logging;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using Entities;
+using ServiceStack.MiniProfiler;
 
 namespace Bartender
 {
@@ -155,6 +156,19 @@ namespace Bartender
 
 		protected void Application_End(object sender, EventArgs e)
 		{
+		}
+
+		protected void Application_BeginRequest(object src, EventArgs e)
+		{
+			if (Request.IsLocal)
+			{
+				Profiler.Start();
+			}
+		}
+
+		protected void Application_EndRequest(object src, EventArgs e)
+		{
+			Profiler.Stop();
 		}
 	}
 }
