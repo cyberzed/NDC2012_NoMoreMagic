@@ -13,7 +13,7 @@ namespace Bartender.Installers
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
 			container.Register(Component.For<IDocumentStore>().Instance(CreateCustomDocumentStore()).LifestyleSingleton());
-			container.Register(Component.For<IDocumentSession>().UsingFactoryMethod(CreateDocumentSession).LifestylePerWebRequest());
+			container.Register(Component.For<IDocumentSession>().UsingFactoryMethod(CreateDocumentSession).LifestyleTransient());
 		}
 
 		private IDocumentStore CreateCustomDocumentStore()

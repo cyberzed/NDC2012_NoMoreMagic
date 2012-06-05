@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
-using Bartender.Entities;
 using Bartender.Repositories;
+using Entities;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 

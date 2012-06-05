@@ -1,5 +1,5 @@
 using Bartender.Api;
-using Bartender.Entities;
+using Entities;
 using Funq;
 using ServiceStack.Configuration;
 using ServiceStack.Logging;

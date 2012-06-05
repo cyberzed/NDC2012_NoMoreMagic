@@ -1,6 +1,6 @@
 ﻿using System;
-using Bartender.Entities;
 using Bartender.Repositories;
+using Entities;
 using ServiceStack.ServiceInterface;
 
 namespace Bartender.Api

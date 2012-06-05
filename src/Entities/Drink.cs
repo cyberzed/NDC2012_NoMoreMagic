@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Bartender.Entities
+namespace Entities
 {
 	public class Drink
 	{

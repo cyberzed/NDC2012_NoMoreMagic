@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Bartender.Entities
+namespace Entities
 {
 	public class DrinkCardResponse
 	{

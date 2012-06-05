@@ -17,7 +17,7 @@ namespace Bartender.Installers
 			container.Register(Classes.FromAssemblyContaining<DrinkCardService>().BasedOn(typeof (IService<>)).WithService.DefaultInterfaces());
 
 			container.Register(
-				Classes.FromAssemblyContaining<DrinkCardRepository>().InSameNamespaceAs<DrinkCardRepository>().LifestylePerWebRequest());
+				Classes.FromAssemblyContaining<DrinkCardRepository>().InSameNamespaceAs<DrinkCardRepository>().LifestyleTransient());
 
 			container.Register(Component.For<ApiHost>().ImplementedBy<ApiHost>().LifestyleSingleton());
 		}

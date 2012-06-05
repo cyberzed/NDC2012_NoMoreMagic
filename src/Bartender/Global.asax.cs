@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Bartender.Entities;
 using Bartender.Installers;
 using Bartender.Repositories;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
+using Entities;
 
 namespace Bartender
 {

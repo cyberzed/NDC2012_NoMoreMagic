@@ -1,4 +1,4 @@
-namespace Bartender.Entities
+namespace Entities
 {
 	public enum DrinkCardType
 	{
