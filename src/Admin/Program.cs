@@ -8,7 +8,7 @@ namespace Admin
 {
 	internal class Program
 	{
-		private static void Main(string[] args)
+		private static void Main()
 		{
 			var apiUri = "http://localhost:59816/api";
 
