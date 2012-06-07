@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Bartender.Installers;
-using Bartender.Repositories;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using Entities;
-using ServiceStack.MiniProfiler;
+using Raven.Client;
+using Raven.Client.Linq;
 
 namespace Bartender
 {
@@ -27,11 +27,11 @@ namespace Bartender
 
 		private void EducateTheBartender()
 		{
-			var drinkRepository = container.Resolve<DrinkRepository>();
+			var session = container.Resolve<IDocumentSession>();
 
-			var drinks = drinkRepository.GetAll();
+			var anyDrinks = (from d in session.Query<Drink>() select d).Any();
 
-			if (drinks.Any())
+			if (anyDrinks)
 			{
 				return;
 			}
@@ -47,7 +47,7 @@ namespace Bartender
 			                   		              	}
 			                   	};
 
-			drinkRepository.Store(whiteRussian);
+			session.Store(whiteRussian);
 
 			var cubaLibre = new Drink
 			                	{
@@ -59,7 +59,7 @@ namespace Bartender
 			                		              	}
 			                	};
 
-			drinkRepository.Store(cubaLibre);
+			session.Store(cubaLibre);
 
 			var longIslandIcedTea = new Drink
 			                        	{
@@ -77,7 +77,7 @@ namespace Bartender
 			                        		              	}
 			                        	};
 
-			drinkRepository.Store(longIslandIcedTea);
+			session.Store(longIslandIcedTea);
 
 			var mojito = new Drink
 			             	{
@@ -92,7 +92,7 @@ namespace Bartender
 			             		              	}
 			             	};
 
-			drinkRepository.Store(mojito);
+			session.Store(mojito);
 
 			var pinaColada = new Drink
 			                 	{
@@ -105,7 +105,7 @@ namespace Bartender
 			                 		              	}
 			                 	};
 
-			drinkRepository.Store(pinaColada);
+			session.Store(pinaColada);
 
 			var manhattan = new Drink
 			                	{
@@ -119,7 +119,7 @@ namespace Bartender
 			                		              	}
 			                	};
 
-			drinkRepository.Store(manhattan);
+			session.Store(manhattan);
 
 			var whiskeySour = new Drink
 			                  	{
@@ -133,7 +133,7 @@ namespace Bartender
 			                  		              	}
 			                  	};
 
-			drinkRepository.Store(whiskeySour);
+			session.Store(whiskeySour);
 		}
 
 		private void InitializeContainer()
@@ -160,15 +160,15 @@ namespace Bartender
 
 		protected void Application_BeginRequest(object src, EventArgs e)
 		{
-			if (Request.IsLocal)
-			{
-				Profiler.Start();
-			}
+			//if (Request.IsLocal)
+			//{
+			//    Profiler.Start();
+			//}
 		}
 
 		protected void Application_EndRequest(object src, EventArgs e)
 		{
-			Profiler.Stop();
+			//Profiler.Stop();
 		}
 	}
 }

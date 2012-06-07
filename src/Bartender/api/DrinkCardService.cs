@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net;
-using Bartender.Repositories;
 using Entities;
+using Raven.Client;
+using Raven.Client.Linq;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 
@@ -9,46 +10,46 @@ namespace Bartender.Api
 {
 	public class DrinkCardService : RestServiceBase<DrinkCard>
 	{
-		private readonly DrinkCardRepository repository;
+		private readonly IDocumentSession session;
 
-		public DrinkCardService(DrinkCardRepository repository)
+		public DrinkCardService(IDocumentSession session)
 		{
-			this.repository = repository;
+			this.session = session;
 		}
 
 		public override object OnGet(DrinkCard request)
 		{
 			if (request.Id != Guid.Empty)
 			{
-				var drinkCard = repository.GetById(request.Id);
+				var drinkCard = session.Load<DrinkCard>(request.Id);
 
 				return new DrinkCardResponse {Cards = new[] {drinkCard}};
 			}
 
-			var cards = repository.GetAll();
+			var cards = (from dc in session.Query<DrinkCard>() select dc);
 
 			return new DrinkCardResponse {Cards = cards};
 		}
 
 		public override object OnDelete(DrinkCard request)
 		{
-			repository.Delete(request);
+			session.Delete(request);
 
 			return new HttpResult(HttpStatusCode.NoContent);
 		}
 
 		public override object OnPost(DrinkCard request)
 		{
-			var card = repository.Store(request);
+			session.Store(request);
 
-			var response = new DrinkCardResponse {Cards = new[] {card}};
+			var response = new DrinkCardResponse {Cards = new[] {request}};
 
 			return new HttpResult(response) {StatusCode = HttpStatusCode.Created};
 		}
 
 		public override object OnPut(DrinkCard request)
 		{
-			repository.Store(request);
+			session.Store(request, request.Id);
 
 			return new HttpResult(HttpStatusCode.NoContent);
 		}
