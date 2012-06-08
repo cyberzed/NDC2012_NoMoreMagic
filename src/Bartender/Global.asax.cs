@@ -21,9 +21,9 @@ namespace Bartender
 
 			EducateTheBartender();
 
-			//var apiHost = container.Resolve<ApiHost>();
+			var apiHost = container.Resolve<ApiHost>();
 
-			//apiHost.Init();
+			apiHost.Init();
 		}
 
 		private void EducateTheBartender()
@@ -135,6 +135,8 @@ namespace Bartender
 			                  	};
 
 			session.Store(whiskeySour);
+
+			session.SaveChanges();
 		}
 
 		private void InitializeContainer()
@@ -161,15 +163,15 @@ namespace Bartender
 
 		protected void Application_BeginRequest(object src, EventArgs e)
 		{
-			//if (Request.IsLocal)
-			//{
-			//    Profiler.Start();
-			//}
+			if (Request.IsLocal)
+			{
+				Profiler.Start();
+			}
 		}
 
 		protected void Application_EndRequest(object src, EventArgs e)
 		{
-			//Profiler.Stop();
+			Profiler.Stop();
 		}
 	}
 }
