@@ -156,9 +156,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiHost.cs" />
-    <Compile Include="Api\DrinkCardService.cs" />
-    <Compile Include="Api\DrinkService.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -166,7 +163,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DrinkCardFormat.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
