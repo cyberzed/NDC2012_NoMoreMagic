@@ -7,6 +7,7 @@ using Castle.Windsor;
 using Entities;
 using Raven.Client;
 using Raven.Client.Linq;
+using ServiceStack.MiniProfiler;
 
 namespace Bartender
 {
@@ -160,15 +161,15 @@ namespace Bartender
 
 		protected void Application_BeginRequest(object src, EventArgs e)
 		{
-			//if (Request.IsLocal)
-			//{
-			//    Profiler.Start();
-			//}
+			if (Request.IsLocal)
+			{
+				Profiler.Start();
+			}
 		}
 
 		protected void Application_EndRequest(object src, EventArgs e)
 		{
-			//Profiler.Stop();
+			Profiler.Stop();
 		}
 	}
 }

@@ -1,9 +1,11 @@
 using Bartender.Api;
 using Entities;
 using Funq;
+using ServiceStack.Common;
 using ServiceStack.Configuration;
 using ServiceStack.Logging;
 using ServiceStack.Logging.NLogger;
+using ServiceStack.ServiceHost;
 using ServiceStack.WebHost.Endpoints;
 
 namespace Bartender
@@ -21,13 +23,13 @@ namespace Bartender
 		public override void Configure(Container container)
 		{
 			//Custom location
-			SetConfig(new EndpointHostConfig {ServiceStackHandlerFactoryPath = "api" /*,EnableFeatures = Feature.All.Remove(Feature.Csv)*/});
+			SetConfig(new EndpointHostConfig {ServiceStackHandlerFactoryPath = "api" ,EnableFeatures = Feature.All.Remove(Feature.Csv)});
 
 			//Custom serializing
-			//DrinkCardFormat.Register(this);
+			DrinkCardFormat.Register(this);
 
 			//Request filtering
-			//RequestFilters.Add((req, res, obj) => LogManager.GetLogger(GetType()).Info(string.Format("UA: {0}", req.UserAgent)));
+			RequestFilters.Add((req, res, obj) => LogManager.GetLogger(GetType()).Info(string.Format("UA: {0}", req.UserAgent)));
 
 			Routes.Add<DrinkCard>("/drinkcards").Add<DrinkCard>("/drinkcards/{Id}");
 			Routes.Add<Drink>("/drinks").Add<Drink>("/drinks/{Id}");
